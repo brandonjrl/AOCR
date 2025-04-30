@@ -12,9 +12,11 @@
         icon.classList.add("fa-eye");
     }
 }
-
+//add modal bancos
+$(document).ready(function () {
+    $('#modalCuentasBancos').modal('show');
+});
 // Ocultar campos de contraseña cuando se abre el modal
 $('#modalRegistroUsuario').on('show.bs.modal', function () {
     $('#grupoPassword').hide(); // ocultar al inicio
 });
-

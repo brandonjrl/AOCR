@@ -12,4 +12,9 @@
         icon.classList.add("fa-eye");
     }
 }
-//add
+
+// Ocultar campos de contraseña cuando se abre el modal
+$('#modalRegistroUsuario').on('show.bs.modal', function () {
+    $('#grupoPassword').hide(); // ocultar al inicio
+});
+

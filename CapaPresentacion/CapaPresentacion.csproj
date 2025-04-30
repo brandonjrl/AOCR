@@ -2334,6 +2334,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MenuBar.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Views_Partial\_ModalRegistroUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

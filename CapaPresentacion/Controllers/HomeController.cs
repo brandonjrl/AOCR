@@ -18,6 +18,9 @@ namespace CapaPresentacion.Controllers
             Session.Clear();      // Elimina todos los valores
             Session.Abandon();    //finaliza la sesion
             return RedirectToAction("Index", "Login");
+
+            //canbuios pruebas
+
         }
     }
 }

@@ -6,14 +6,14 @@
     var menu = new List<dynamic>
 {
 new {
-NombreMenu = "Botones",
+NombreMenu = "Financiero",
 oSubMenu = new List<dynamic>
 {
 new { NombreSubMenu = "PDF", Controlador = "PDF", Vista = "Imprimir" },
 }
 },
 new {
-NombreMenu = "Buscar",
+NombreMenu = "Operador",
 oSubMenu = new List<dynamic>
 {
 new { NombreSubMenu = "Filtros", Controlador = "Filtro", Vista = "Index" },
@@ -22,11 +22,20 @@ new { NombreSubMenu = "FiltroDinamico", Controlador = "Filtro", Vista = "Dinamic
 },
 
 new{
-NombreMenu = "Tabla",
+NombreMenu = "Inspector",
 oSubMenu = new List<dynamic>
 {
- new { NombreSubMenu = "Tabla", Controlador = "Tabla", Vista = "Index" },
- new { NombreSubMenu = "TablaEdicion", Controlador = "Tabla", Vista = "TablaCRUD" }
+new { NombreSubMenu = "Tabla", Controlador = "Tabla", Vista = "Index" },
+new { NombreSubMenu = "TablaEdicion", Controlador = "Tabla", Vista = "TablaCRUD" }
+}
+},
+
+new{
+NombreMenu = "Direccion de Certificacion",
+oSubMenu = new List<dynamic>
+{
+new { NombreSubMenu = "Tabla", Controlador = "Tabla", Vista = "Index" },
+new { NombreSubMenu = "TablaEdicion", Controlador = "Tabla", Vista = "TablaCRUD" }
 }
 }
 };

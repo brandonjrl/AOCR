@@ -12,11 +12,49 @@
         icon.classList.add("fa-eye");
     }
 }
-//add modal bancos
+
+// Mostrar automáticamente el modal de bancos
 $(document).ready(function () {
     $('#modalCuentasBancos').modal('show');
 });
-// Ocultar campos de contraseña cuando se abre el modal
+
+// Al mostrar el modal de registro, ocultar contraseñas y cargar empresas
 $('#modalRegistroUsuario').on('show.bs.modal', function () {
-    $('#grupoPassword').hide(); // ocultar al inicio
+    $('#grupoPassword').hide();
+    cargarEmpresas(); // datos dummy
+
+    if ($('#Empresa').length && $('#Rol').length) {
+        $('#Empresa').val('');
+        $('#Rol').val('');
+    }
 });
+
+// Función para mostrar los campos de contraseña
+function mostrarCamposContrasena() {
+    $('#grupoPassword').show();
+}
+
+// Cargar empresas dummy al <select>
+function cargarEmpresas() {
+    const empresas = [
+        { id: '1', nombre: 'DGAC' },
+        { id: '2', nombre: 'LATAM Airlines' },
+        { id: '3', nombre: 'TAME EP' },
+        { id: '4', nombre: 'Avianca Ecuador' },
+        { id: '5', nombre: 'Aeroregional' },
+        { id: '6', nombre: 'Equair' }
+    ];
+
+    const select = $('#Empresa');
+    select.empty(); // limpia las opciones anteriores
+    select.append('<option value="">-- Seleccione una empresa --</option>');
+
+    empresas.forEach(e => {
+        select.append(`<option value="${e.id}">${e.nombre}</option>`);
+    });
+}
+
+// Mostrar los campos cuando se quiera (puedes ligar esto a un botón o checkbox)
+function mostrarCamposContrasena() {
+    $('#grupoPassword').show();
+}

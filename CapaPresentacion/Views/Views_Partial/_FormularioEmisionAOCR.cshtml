@@ -147,7 +147,7 @@
                             <i class="fas fa-save"></i> Guardar Aeronaves
                         </button>
                     </div>
-                </div> 
+                </div>
             </div>
 
 
@@ -204,22 +204,153 @@
 
             <!-- Paso 4: Anexos -->
             <div class="tab-pane fade" id="anexos" role="tabpanel" aria-labelledby="list-anexos-list">
-                <h5 class="mb-3 font-weight-bold">Anexos</h5>
-                <form id="formAnexos">
-                    <div class="form-group">
-                        <label for="archivoAnexo">Subir documentos (PDF)</label>
-                        <input type="file" class="form-control-file" id="archivoAnexo" accept=".pdf">
-                        <small class="form-text text-muted">Tamaño máximo permitido: 2MB</small>
-                    </div>
-                </form>
+                <h5 class="mb-3 font-weight-bold">Anexos Requeridos</h5>
 
-                <!-- Botones SOLO en ANEXOS -->
+                <div class="alert alert-info" role="alert">
+                    Documentación a presentar. Tamaño máximo permitido: <strong>2 MB</strong> por archivo.<br>
+                    Formatos permitidos: <strong>PDF, JPG, PNG</strong>.
+                </div>
+
+                <div style="max-height: 50vh; overflow-y: auto; padding-right: 10px;">
+                    <form id="formAnexos">
+                        <!-- Cada bloque tiene su archivo, checkbox y concepto -->
+                        <!-- Bloque 1 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Copia de factura de pago *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoFacturaPago" accept=".pdf" required onchange="validarArchivo('archivoFacturaPago')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkFacturaPago" onchange="toggleCaptura('archivoFacturaPago', 'capturaFacturaPago', this)">
+                                <label class="form-check-label" for="chkFacturaPago">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaFacturaPago" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoFacturaPago" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoFacturaPago')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoFacturaPago" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 2 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Copia de AOC válida *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoAOC" accept=".pdf" required onchange="validarArchivo('archivoAOC')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkAOC" onchange="toggleCaptura('archivoAOC', 'capturaAOC', this)">
+                                <label class="form-check-label" for="chkAOC">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaAOC" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoAOC" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoAOC')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoAOC" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 3 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Copia de especificaciones de operaciones (OpSpecs) *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoOpSpecs" accept=".pdf" required onchange="validarArchivo('archivoOpSpecs')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkOpSpecs" onchange="toggleCaptura('archivoOpSpecs', 'capturaOpSpecs', this)">
+                                <label class="form-check-label" for="chkOpSpecs">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaOpSpecs" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoOpSpecs" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoOpSpecs')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoOpSpecs" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 4 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Manual de operaciones *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoManualOperaciones" accept=".pdf" required onchange="validarArchivo('archivoManualOperaciones')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkManualOperaciones" onchange="toggleCaptura('archivoManualOperaciones', 'capturaManualOperaciones', this)">
+                                <label class="form-check-label" for="chkManualOperaciones">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaManualOperaciones" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoManualOperaciones" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoManualOperaciones')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoManualOperaciones" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 5 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Carta de aprobación de la MEL *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoMEL" accept=".pdf" required onchange="validarArchivo('archivoMEL')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkMEL" onchange="toggleCaptura('archivoMEL', 'capturaMEL', this)">
+                                <label class="form-check-label" for="chkMEL">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaMEL" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoMEL" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoMEL')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoMEL" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 6 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Permiso de operación Consejo Nacional de Aviación *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoPermisoOperacion" accept=".pdf" required onchange="validarArchivo('archivoPermisoOperacion')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkPermisoOperacion" onchange="toggleCaptura('archivoPermisoOperacion', 'capturaPermisoOperacion', this)">
+                                <label class="form-check-label" for="chkPermisoOperacion">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaPermisoOperacion" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoPermisoOperacion" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoPermisoOperacion')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoPermisoOperacion" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 7 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Descripción del plan de seguridad *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoPlanSeguridad" accept=".pdf" required onchange="validarArchivo('archivoPlanSeguridad')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkPlanSeguridad" onchange="toggleCaptura('archivoPlanSeguridad', 'capturaPlanSeguridad', this)">
+                                <label class="form-check-label" for="chkPlanSeguridad">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaPlanSeguridad" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoPlanSeguridad" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoPlanSeguridad')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoPlanSeguridad" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                        <!-- Bloque 8 -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">Certificado de ruido o documento equivalente *</label>
+                            <input type="file" class="form-control-file mb-2" id="archivoCertificadoRuido" accept=".pdf" required onchange="validarArchivo('archivoCertificadoRuido')">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="chkCertificadoRuido" onchange="toggleCaptura('archivoCertificadoRuido', 'capturaCertificadoRuido', this)">
+                                <label class="form-check-label" for="chkCertificadoRuido">Supera el tamaño permitido</label>
+                            </div>
+                            <div id="capturaCertificadoRuido" style="display:none;">
+                                <input type="file" class="form-control-file mb-2" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <textarea class="form-control" id="conceptoCertificadoRuido" rows="2" placeholder="Ingrese enlace o descripción..." required onblur="validarConcepto('conceptoCertificadoRuido')"></textarea>
+                            <div class="text-danger small mt-1" id="alertaConceptoCertificadoRuido" style="display:none;">⚠️ Debe ingresar un enlace o descripción válida.</div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+                <!-- Botones -->
                 <div class="text-right mt-4">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" type="button" onclick="guardarFormulario()">Guardar</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -461,7 +592,47 @@
         window.guardarFormulario = function () {
             alert('Simulación: Formulario guardado.');
         };
-
     });
+    //Función que activa o desactiva el campo de captura de pantalla
+    function validarArchivo(idInput) {
+        const input = document.getElementById(idInput);
+        const archivo = input.files[0];
+
+        if (archivo) {
+            const tamañoMaximo = 2 * 1024 * 1024; // 2 MB en bytes
+            if (archivo.size > tamañoMaximo) {
+                alert('El archivo supera los 2MB permitidos. Por favor suba una captura si aplica.');
+                input.value = ''; // Vaciar el campo
+            }
+        }
+    }
+
+    function toggleCaptura(idArchivoPdf, idCapturaImagen, checkbox) {
+        const inputArchivo = document.getElementById(idArchivoPdf);
+        const divCaptura = document.getElementById(idCapturaImagen);
+
+        if (checkbox.checked) {
+            inputArchivo.value = ''; // Borra el archivo PDF
+            inputArchivo.disabled = true;
+            inputArchivo.required = false;
+            divCaptura.style.display = 'block';
+        } else {
+            inputArchivo.disabled = false;
+            inputArchivo.required = true;
+            divCaptura.style.display = 'none';
+        }
+    }
+
+    function validarConcepto(idTextarea) {
+        const textarea = document.getElementById(idTextarea);
+        const alerta = document.getElementById('alerta' + idTextarea.charAt(0).toUpperCase() + idTextarea.slice(1));
+
+        if (textarea.value.trim() === '') {
+            alerta.style.display = 'block';
+        } else {
+            alerta.style.display = 'none';
+        }
+    }
+
 </script>
 

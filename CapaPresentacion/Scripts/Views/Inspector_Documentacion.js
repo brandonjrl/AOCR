@@ -5,77 +5,35 @@
             oid: 1,
             fechaSolicitud: '2025-04-30',
             tipoSolicitud: 'EMISIÓN',
-            estadoSolicitud: 'APROBADA',        // Solo puede ser: APROBADA, ENVIADA, RECHAZADA
             companiaOperadora: 'URBANOFILMS CIA. LTDA.',
-            inspectorAsignado: 'Carlos Pérez',
-            noAutorizacion: 'DGAC-REG-UAS-00000046-2025',
-            fechaAprobacion: '2025-05-01',
-            uasRegistro: 'HCD0000044',
-            estadoAutorizacion: 'APROBADA'      // Dato explícito
+            estadoTramite: 'APROBADA'      // Aprobada, pendeinte y modificacion
         },
         {
             oid: 2,
             fechaSolicitud: '2025-05-01',
-            tipoSolicitud: 'EMISIÓN',
-            estadoSolicitud: 'ENVIADA',
+            tipoSolicitud: 'MODIFICACION',
             companiaOperadora: 'AeroSky Services',
-            inspectorAsignado: '', // No asignado
-            noAutorizacion: '',
-            fechaAprobacion: '',
-            uasRegistro: '',
-            estadoAutorizacion: 'PENDIENTE'
+            estadoTramite: 'PENDIENTE'
         },
         {
             oid: 3,
             fechaSolicitud: '2025-05-02',
             tipoSolicitud: 'RENOVACIÓN',
-            estadoSolicitud: 'RECHAZADA',
             companiaOperadora: 'SkyHigh Drone Co.',
-            inspectorAsignado: 'Andrea Martínez',
-            noAutorizacion: '',
-            fechaAprobacion: '',
-            uasRegistro: '',
-            estadoAutorizacion: 'RECHAZADA'
+            estadoTramite: 'MODIFICACION'
         },
-        {
-            oid: 4,
-            fechaSolicitud: '2025-05-02',
-            tipoSolicitud: 'RENOVACIÓN',
-            estadoSolicitud: 'ENVIADA',
-            companiaOperadora: 'SkyHigh Drone Co.',
-            inspectorAsignado: 'Andrea Martínez',
-            noAutorizacion: '',
-            fechaAprobacion: '',
-            uasRegistro: '',
-            estadoAutorizacion: 'MODIFICACION'
-        }
     ];
 
     // 2. Función para construir el HTML de acciones por fila
     function construirAcciones(item) {
         const idSolicitud = item.oid;
-        const codigoAutorizacion = item.noAutorizacion || '';
-
-        let btnImprimir = '';
         let btnConsultar = '';
-
-        // Si estadoSolicitud es APROBADA puede imprimir
-        if (item.estadoSolicitud === 'APROBADA') {
-            btnImprimir = '<a href="#" class="btn btn-outline-primary btn-sm" onclick="imprimir(\'' + codigoAutorizacion + '\', \'01\')" title="Imprimir Autorización">' +
-                '<i class="fas fa-print"></i>' +
-                '</a>&nbsp;';
-        } else {
-            btnImprimir = '<a href="#" class="btn btn-outline-primary btn-sm disabled" title="Imprimir Autorización">' +
-                '<i class="fas fa-print"></i>' +
-                '</a>&nbsp;';
-        }
-
         // El botón de consultar siempre activo
         btnConsultar = '<a href="#" class="btn btn-outline-success btn-sm" onclick="consultarSolicitud(' + idSolicitud + ')" title="Consultar Solicitud">' +
             '<i class="fas fa-search"></i>' +
             '</a>';
 
-        return '<div>' + btnImprimir + btnConsultar + '</div>';
+        return '<div>' + btnConsultar + '</div>';
     }
 
     // 3. Función auxiliar para pintar el estadoAutorizacion visualmente
@@ -97,13 +55,8 @@
         oid: item.oid,
         fechaSolicitud: item.fechaSolicitud,
         tipoSolicitud: item.tipoSolicitud,
-        estadoSolicitud: item.estadoSolicitud, // Se mantiene como texto
         companiaOperadora: item.companiaOperadora,
-        inspectorAsignado: item.inspectorAsignado || '<span class="text-danger">PENDIENTE</span>',
-        noAutorizacion: item.noAutorizacion || '-',
-        fechaAprobacion: item.fechaAprobacion || '-',
-        uasRegistro: item.uasRegistro,
-        estadoAutorizacion: formatoEstadoAutorizacion(item.estadoAutorizacion), // Pintar el estadoAutorizacion
+        estadoTramite: formatoEstadoAutorizacion(item.estadoTramite), // Pintar el estadoAutorizacion
         acciones: construirAcciones(item)
     }));
 
@@ -112,13 +65,8 @@
         { data: 'oid' },
         { data: 'fechaSolicitud' },
         { data: 'tipoSolicitud' },
-        { data: 'estadoSolicitud' },
         { data: 'companiaOperadora' },
-        { data: 'inspectorAsignado' },
-        { data: 'noAutorizacion' },
-        { data: 'fechaAprobacion' },
-        { data: 'uasRegistro' },
-        { data: 'estadoAutorizacion' },
+        { data: 'estadoTramite' },
         { data: 'acciones' }
     ];
 

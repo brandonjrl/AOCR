@@ -18,5 +18,9 @@ namespace CapaPresentacion.Controllers
         {
             return View();
         }
+        public ActionResult ConsultarSolicitudPartial()
+        {
+            return PartialView("~/Views/Views_Partial/_ConsultarSolicitudPartial.cshtml");
+        }
     }
 }

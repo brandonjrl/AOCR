@@ -2311,6 +2311,7 @@
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
     <Content Include="Content\documents\FormatoAeronaves.xlsx" />
+    <Content Include="Content\documents\prueba.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2344,6 +2345,7 @@
     <Content Include="Views\Views_Partial\_FormularioEmisionAOCR.cshtml" />
     <Content Include="Views\Inspector\RevisarDocumentacion.cshtml" />
     <Content Include="Views\Inspector\Inspeccion.cshtml" />
+    <Content Include="Views\Views_Partial\_ConsultaSolicitudPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

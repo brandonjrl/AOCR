@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Operador";
+    ViewBag.Title = "Inspector";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,7 +17,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <!-- Tabla de solicitudes -->
                 <div class="card card-default">
                     <div class="card-body">
                         <table id="tablaSolicitudes" class="table table-bordered table-striped table-sm" style="width:100%; font-size:12px;">
@@ -34,7 +33,6 @@
                             <tbody></tbody>
                         </table>
 
-                        <!-- Loader -->
                         <div id="loader" class="text-center my-4" style="display:none;">
                             <div class="spinner-border text-info" role="status">
                                 <span class="sr-only">Cargando...</span>
@@ -48,7 +46,53 @@
     </div>
 </section>
 
+<!-- Modal de Consulta de Solicitud -->
+<div class="modal fade" id="modalSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalSolicitudLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" id="modalSolicitudLabel">Consultar Solicitud</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+                <!-- Aquí inyecto directamente el partial ya cargado -->
+                <div id="contenidoModalSolicitud">
+                    @Html.Partial("~/Views/Views_Partial/_ConsultaSolicitudPartial.cshtml")
+                </div>
+
+                <hr />
+
+                <!-- Estado y Observación -->
+                <div class="form-group">
+                    <label for="estadoSolicitud" class="font-weight-bold">Estado Tramite</label>
+                    <select id="estadoSolicitud" class="form-control form-control-sm">
+                        <option value="APROBADA">APROBADA</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="MODIFICACION">MODIFICACION</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacionSolicitud" class="font-weight-bold">Observación</label>
+                    <textarea id="observacionSolicitud" class="form-control" rows="4" placeholder="Ingrese observación..."></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-door-closed"></i> Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section scripts {
-    <!-- Scripts específicos de esta vista -->
     <script src="@Url.Content("~/Scripts/Views/Inspector_Documentacion.js")" type="text/javascript"></script>
 }

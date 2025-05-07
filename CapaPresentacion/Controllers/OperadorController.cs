@@ -16,13 +16,11 @@ namespace CapaPresentacion.Controllers
 
         public ActionResult FormularioEmisionAOCR()
         {
-            ViewBag.SoloLectura = false; // Para llenar el formulario
             return PartialView("~/Views/Views_Partial/_FormularioEmisionAOCR.cshtml");
         }
 
         public ActionResult ConsultarEmisionAOCR(int id)
         {
-            ViewBag.SoloLectura = true; // Para solo visualizar
             return PartialView("~/Views/Views_Partial/_FormularioEmisionAOCR.cshtml");
         }
 

@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InspectorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OperadorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2310,6 +2311,7 @@
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
     <Content Include="Content\documents\FormatoAeronaves.xlsx" />
+    <Content Include="Content\documents\prueba.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2321,6 +2323,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Views\Inspector_Documentacion.js" />
     <Content Include="Scripts\Views\Login_Index.js" />
     <Content Include="Scripts\Views\Operador_Index.js" />
     <Content Include="Web.config" />
@@ -2340,6 +2343,9 @@
     <Content Include="Views\Views_Partial\_ModalRegistroUsuario.cshtml" />
     <Content Include="Views\Operador\Index.cshtml" />
     <Content Include="Views\Views_Partial\_FormularioEmisionAOCR.cshtml" />
+    <Content Include="Views\Inspector\RevisarDocumentacion.cshtml" />
+    <Content Include="Views\Inspector\Inspeccion.cshtml" />
+    <Content Include="Views\Views_Partial\_ConsultaSolicitudPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

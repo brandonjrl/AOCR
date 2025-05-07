@@ -36,6 +36,18 @@
             fechaAprobacion: '',
             uasRegistro: '',
             estadoAutorizacion: 'RECHAZADA'
+        },
+        {
+            oid: 4,
+            fechaSolicitud: '2025-05-02',
+            tipoSolicitud: 'RENOVACIÓN',
+            estadoSolicitud: 'ENVIADA',
+            companiaOperadora: 'SkyHigh Drone Co.',
+            inspectorAsignado: 'Andrea Martínez',
+            noAutorizacion: '',
+            fechaAprobacion: '',
+            uasRegistro: '',
+            estadoAutorizacion: 'MODIFICACION'
         }
     ];
 
@@ -74,6 +86,8 @@
             return '<a class="text-warning"><i class="fas fa-clock"></i> PENDIENTE</a>';
         } else if (estado === 'RECHAZADA') {
             return '<a class="text-danger"><i class="fas fa-times-circle"></i> RECHAZADA</a>';
+        } else if (estado === 'MODIFICACION') {
+            return '<a class="text-primary"><i class="fas fa-edit"></i> MODIFICACION</a>';
         }
         return estado;
     }

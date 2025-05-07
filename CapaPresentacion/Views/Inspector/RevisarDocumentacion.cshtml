@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Inspector";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-1">
+            <div class="col-sm-12 text-center btn-info">
+                <h4>Reconocimiento del Certificado de Explotador de Servicios Aéreos (AOCR)</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <table id="tablaSolicitudes" class="table table-bordered table-striped table-sm" style="width:100%; font-size:12px;">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th>Oid</th>
+                                    <th>Fecha Solicitud</th>
+                                    <th>Tipo Solicitud</th>
+                                    <th>Compañía Operadora</th>
+                                    <th>Estado Tramite</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <div id="loader" class="text-center my-4" style="display:none;">
+                            <div class="spinner-border text-info" role="status">
+                                <span class="sr-only">Cargando...</span>
+                            </div>
+                            <p>Cargando datos, por favor espere...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal de Consulta de Solicitud -->
+<div class="modal fade" id="modalSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalSolicitudLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" id="modalSolicitudLabel">Consultar Solicitud</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+                <!-- Aquí inyecto directamente el partial ya cargado -->
+                <div id="contenidoModalSolicitud">
+                    @Html.Partial("~/Views/Views_Partial/_ConsultaSolicitudPartial.cshtml")
+                </div>
+
+                <hr />
+
+                <!-- Estado y Observación -->
+                <div class="form-group">
+                    <label for="estadoSolicitud" class="font-weight-bold">Estado Tramite</label>
+                    <select id="estadoSolicitud" class="form-control form-control-sm">
+                        <option value="APROBADA">APROBADA</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="MODIFICACION">MODIFICACION</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacionSolicitud" class="font-weight-bold">Observación</label>
+                    <textarea id="observacionSolicitud" class="form-control" rows="4" placeholder="Ingrese observación..."></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-door-closed"></i> Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Views/Inspector_Documentacion.js")" type="text/javascript"></script>
+}

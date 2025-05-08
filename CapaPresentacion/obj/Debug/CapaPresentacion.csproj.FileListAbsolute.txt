@@ -186,3 +186,4 @@ C:\Users\Dylan\Source\Repos\brandonjrl\AOCR\CapaPresentacion\obj\Debug\CapaPrese
 C:\Users\Dylan\Source\Repos\brandonjrl\AOCR\CapaPresentacion\obj\Debug\CapaPresentacion.csproj.CopyComplete
 C:\Users\Dylan\Source\Repos\brandonjrl\AOCR\CapaPresentacion\obj\Debug\CapaPresentacion.dll
 C:\Users\Dylan\Source\Repos\brandonjrl\AOCR\CapaPresentacion\obj\Debug\CapaPresentacion.pdb
+C:\Users\Dylan\Source\Repos\brandonjrl\AOCR\CapaPresentacion\obj\Debug\CapaPresentacion.csprojAssemblyReference.cache

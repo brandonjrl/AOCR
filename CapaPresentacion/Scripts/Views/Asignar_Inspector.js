@@ -16,7 +16,6 @@
         }
     });
 });
-//solo cuando esta pendiente
 
 // =========================
 // Datos de Solicitudes Dummy
@@ -28,7 +27,7 @@ const datosSolicitudes = [
         tipoSolicitud: 'EMISIÓN',
         companiaOperadora: 'URBANOFILMS CIA. LTDA.',
         inspectorAsignado: 'Carlos Pérez',
-        estadoTramite: 'APROBADA'
+        estadoTramite: 'PENDIENTE'
     },
     {
         oid: 2,

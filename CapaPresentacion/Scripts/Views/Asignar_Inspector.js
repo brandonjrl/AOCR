@@ -1,7 +1,20 @@
-﻿
-$(document).ready(function () {
-    // Cargar tabla de solicitudes
+﻿$(document).ready(function () {
+    // Inicializar tabla
     inicializarTablaSolicitudes();
+
+    // Ocultar el botón al cargar la página
+    $('#btnAsignarInspector').hide();
+
+    // Mostrar/ocultar botón al cambiar de menú
+    $('a[data-toggle="list"]').on('shown.bs.tab', function (e) {
+        const target = $(e.target).attr("href"); // href="#inspector", etc.
+
+        if (target === "#inspector") {
+            $('#btnAsignarInspector').show();
+        } else {
+            $('#btnAsignarInspector').hide();
+        }
+    });
 });
 
 // =========================
@@ -106,26 +119,30 @@ function construirAcciones(item) {
 // ==========================
 function consultarSolicitud(idSolicitud) {
     $('#modalSolicitud').modal('show');
+    $('#modalSolicitud').data('solicitud-id', idSolicitud); // Guardar el id de la solicitud en el modal
 
     // Cargar datos dummy al abrir
     cargarDatosDummy();
+    const solicitud = datosSolicitudes.find(s => s.oid === idSolicitud);
+    if (solicitud && solicitud.estadoTramite === 'PENDIENTE') {
+        $('#bloqueAsignacionInspector').show();
+    } else {
+        $('#bloqueAsignacionInspector').hide();
+    }
 }
 
 // ==========================
 // Cargar Datos Dummy Dentro del Modal
 // ==========================
 function cargarDatosDummy() {
-    // Aeronaves Dummy
     const aeronaves = [
         { fabricante: 'Boeing', modelo: '737', serie: '12345', matricula: 'HC-ABC', configuracion: 'Pasajeros', etapaRuido: 'Etapa 3', peso: '70000' },
         { fabricante: 'Airbus', modelo: 'A320', serie: '67890', matricula: 'HC-DEF', configuracion: 'Carga', etapaRuido: 'Etapa 4', peso: '80000' },
         { fabricante: 'Boeing', modelo: '737', serie: '99999', matricula: 'HC-GHI', configuracion: 'Pasajeros', etapaRuido: 'Etapa 3', peso: '70000' }
     ];
 
-    // Llenar tabla aeronaves
     let tbody = $('#tablaAeronaves tbody');
     tbody.empty();
-
     aeronaves.forEach(a => {
         tbody.append(`
             <tr>
@@ -140,7 +157,6 @@ function cargarDatosDummy() {
         `);
     });
 
-    // ➡️ Contador dinámico de aeronaves
     const resumen = {};
     aeronaves.forEach(a => {
         const key = `${a.fabricante} ${a.modelo}`;
@@ -153,13 +169,11 @@ function cargarDatosDummy() {
 
     $('#contadorAeronaves').val(textoResumen);
 
-    // Operaciones dummy
     $('#fechaInicioOperaciones').val('2025-06-01');
     $('#tiposOperacion').val('Operaciones Regulares\nPasajeros/Carga/Correo');
     $('#aeropuertosEcuador').val('Quito\nGuayaquil');
     $('#resumenOperaciones').val('Operaciones regulares en Quito y Guayaquil, transporte de pasajeros.');
 
-    // Anexos dummy
     const anexos = [
         { nombre: 'Factura de Pago', url: '/Content/documents/prueba.pdf' },
         { nombre: 'Copia de AOC', url: '/Content/documents/prueba.pdf' }
@@ -177,3 +191,30 @@ function cargarDatosDummy() {
         `);
     });
 }
+
+// ==========================
+// Asignar Inspector a Solicitud
+// ==========================
+$('#btnAsignarInspector').click(function () {
+    const inspectorSeleccionado = $('#selectInspector').val();
+
+    if (inspectorSeleccionado) {
+        const solicitudId = $('#modalSolicitud').data('solicitud-id');
+        const solicitud = datosSolicitudes.find(s => s.oid === solicitudId);
+        solicitud.inspectorAsignado = inspectorSeleccionado;
+
+        const tabla = $('#tablaSolicitudes').DataTable();
+        tabla.row(`#solicitud-${solicitudId}`).data({
+            ...solicitud,
+            inspectorAsignado: inspectorSeleccionado,
+            estadoTramite: formatoEstado(solicitud.estadoTramite),
+            acciones: construirAcciones(solicitud)
+        }).draw();
+
+        $('#modalSolicitud').modal('hide');
+
+        alert('Inspector asignado: ' + inspectorSeleccionado);
+    } else {
+        alert('Por favor, seleccione un inspector');
+    }
+});

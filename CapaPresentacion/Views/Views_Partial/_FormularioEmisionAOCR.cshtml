@@ -30,7 +30,7 @@
                 <h5 class="mb-3 font-weight-bold">Datos del Explotador-Solicitante</h5>
                 <div class="modal-body" id="contenidoModal">
 
-                    <div style="max-height: 70vh; overflow-y: auto; padding: 15px 10px 15px 10px;">
+                    <div style="max-height: 50vh; overflow-y: auto; padding: 15px 10px 15px 10px;">
                         <form id="formExplotador">
                             <div class="form-group">
                                 <label for="nombreCompania">Nombre de la Compañía *</label>
@@ -92,7 +92,7 @@
             <!-- Paso 2: Información de Aeronaves -->
             <div class="tab-pane fade" id="aeronaves" role="tabpanel" aria-labelledby="list-aeronaves-list">
                 <h5 class="mb-3 font-weight-bold">Información de las Aeronaves</h5>
-                <div style="max-height: 70vh; overflow-y: auto; padding-right: 10px;">
+                <div style="max-height: 50vh; overflow-y: auto; padding-right: 10px;">
 
                     <!-- Botones de acción -->
                     <div class="mb-3 d-flex flex-wrap align-items-center">
@@ -123,6 +123,7 @@
                                     <th>Configuración</th>
                                     <th>Etapa de Ruido</th>
                                     <th>Peso</th>
+                                    <th>Designador OASI</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -361,9 +362,6 @@
         <div class="modal-content shadow">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="modalInformacionCompaniaLabel">Nueva Compañía / Operador - <i>New Company / Operator</i></h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <p>
@@ -394,14 +392,11 @@
 </div>
 
 <!-- Modal para Agregar Aeronave -->
-<div class="modal fade" id="modalAgregarAeronave" tabindex="-1" role="dialog" aria-labelledby="modalAgregarAeronaveLabel" aria-hidden="true">
+<div class="modal fade" id="modalAgregarAeronave" tabindex="-1" role="dialog" aria-labelledby="modalAgregarAeronaveLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content shadow">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="modalAgregarAeronaveLabel">Agregar Nueva Aeronave</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <form id="formAgregarAeronave">
@@ -417,13 +412,17 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="serie">Serie *</label>
                             <input type="text" class="form-control" id="serie" placeholder="Ingrese número de serie">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="matricula">Matrícula *</label>
                             <input type="text" class="form-control" id="matricula" placeholder="Ingrese matrícula">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="designadorOASI">Designador OASI *</label>
+                            <input type="text" class="form-control text-uppercase" id="designadorOASI" maxlength="6" placeholder="Ej: AB1234">
                         </div>
                     </div>
 
@@ -433,24 +432,23 @@
                             <input type="text" class="form-control" id="configuracion" placeholder="Ej: Pasajeros, Carga">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="etapaRuido">Etapa de Ruido</label>
+                            <label for="etapaRuido">Etapa de Ruido *</label>
                             <input type="text" class="form-control" id="etapaRuido" placeholder="Ingrese etapa">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="peso">Peso (kg)</label>
+                            <label for="peso">Peso (kg) *</label>
                             <input type="number" class="form-control" id="peso" placeholder="Ej: 75000">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="$('#modalAgregarAeronave').modal('hide')">Cancelar</button>
                 <button type="button" class="btn btn-success" id="btnGuardarAeronave">Guardar Aeronave</button>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Librería para leer Excel -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -505,6 +503,7 @@
             var configuracion = $('#configuracion').val();
             var etapaRuido = $('#etapaRuido').val();
             var peso = $('#peso').val();
+            var desigOASI = $('#designadorOASI').val();
 
             // Validación básica
             if (fabricante === '' || modelo === '' || serie === '' || matricula === '' || configuracion === '') {
@@ -522,6 +521,7 @@
                     <td>${configuracion}</td>
                     <td>${etapaRuido}</td>
                     <td>${peso}</td>
+                    <td>${desigOASI}</td>
                     <td class="text-center">
                         <button type="button" class="btn btn-danger btn-sm btnEliminarAeronave">Eliminar</button>
                     </td>
@@ -574,6 +574,7 @@
                             <td>${fila[4] || ''}</td>
                             <td>${fila[5] || ''}</td>
                             <td>${fila[6] || ''}</td>
+                            <td>${fila[7] || ''}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm btnEliminarAeronave">Eliminar</button>
                             </td>

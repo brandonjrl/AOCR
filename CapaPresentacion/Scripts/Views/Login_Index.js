@@ -53,8 +53,3 @@ function cargarEmpresas() {
         select.append(`<option value="${e.id}">${e.nombre}</option>`);
     });
 }
-
-// Mostrar los campos cuando se quiera (puedes ligar esto a un botón o checkbox)
-function mostrarCamposContrasena() {
-    $('#grupoPassword').show();
-}

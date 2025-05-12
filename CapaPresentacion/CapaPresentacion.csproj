@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CertificacionController.cs" />
+    <Compile Include="Controllers\FinancieroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InspectorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -2349,6 +2350,7 @@
     <Content Include="Views\Inspector\Inspeccion.cshtml" />
     <Content Include="Views\Views_Partial\_ConsultaSolicitudPartial.cshtml" />
     <Content Include="Views\Certificacion\AsignarInspector.cshtml" />
+    <Content Include="Views\Financiero\Financiero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

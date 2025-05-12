@@ -27,7 +27,7 @@ const datosSolicitudes = [
         tipoSolicitud: 'EMISIÓN',
         companiaOperadora: 'URBANOFILMS CIA. LTDA.',
         inspectorAsignado: 'Carlos Pérez',
-        estadoTramite: 'PENDIENTE'
+        estadoTramite: 'APROBADA'
     },
     {
         oid: 2,
@@ -36,14 +36,6 @@ const datosSolicitudes = [
         companiaOperadora: 'AeroSky Services',
         inspectorAsignado: '', // No asignado
         estadoTramite: 'PENDIENTE'
-    },
-    {
-        oid: 3,
-        fechaSolicitud: '2025-05-02',
-        tipoSolicitud: 'RENOVACIÓN',
-        companiaOperadora: 'SkyHigh Drone Co.',
-        inspectorAsignado: 'Andrea Martínez',
-        estadoTramite: 'MODIFICACION'
     }
 ];
 

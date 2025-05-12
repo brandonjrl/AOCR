@@ -2327,6 +2327,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Inspector_Documentacion.js" />
     <Content Include="Scripts\Views\Asignar_Inspector.js" />
+    <Content Include="Scripts\Views\Financiero_Documentacion.js" />
     <Content Include="Scripts\Views\Login_Index.js" />
     <Content Include="Scripts\Views\Operador_Index.js" />
     <Content Include="Web.config" />
@@ -2351,6 +2352,7 @@
     <Content Include="Views\Views_Partial\_ConsultaSolicitudPartial.cshtml" />
     <Content Include="Views\Certificacion\AsignarInspector.cshtml" />
     <Content Include="Views\Financiero\Financiero.cshtml" />
+    <Content Include="Views\Financiero\Viaticos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

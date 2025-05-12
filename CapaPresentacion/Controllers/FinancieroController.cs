@@ -13,5 +13,9 @@ namespace CapaPresentacion.Controllers
         {
             return View();
         }
+        public ActionResult Viaticos()
+        {
+            return View();
+        }
     }
 }

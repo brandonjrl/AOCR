@@ -570,11 +570,14 @@
                     return;
                 }
 
+                // Detectar delimitador automáticamente
+                const delimitador = detectarDelimitador(lineas[0]);
+
                 // Limpiar tabla antes de cargar nuevas filas
                 $('#tablaAeronaves tbody').empty();
 
                 for (let i = 1; i < lineas.length; i++) {
-                    const fila = lineas[i].split(';');
+                    const fila = lineas[i].split(delimitador);
 
                     if (fila.length !== 8) {
                         alert(`Error en la fila ${i + 1}: Se esperaban 8 columnas pero se encontraron ${fila.length}.`);
@@ -604,7 +607,6 @@
 
             lector.readAsText(archivo, 'UTF-8');
         });
-
         // Función genérica para guardar formularios (demo)
         window.guardarFormulario = function () {
             alert('Simulación: Formulario guardado.');
@@ -650,6 +652,13 @@
             alerta.style.display = 'none';
         }
     }
+
+    function detectarDelimitador(lineaCabecera) {
+        const cantidadPuntosComa = (lineaCabecera.match(/;/g) || []).length;
+        const cantidadComas = (lineaCabecera.match(/,/g) || []).length;
+        return cantidadPuntosComa >= cantidadComas ? ';' : ',';
+    }
+
 
 </script>
 

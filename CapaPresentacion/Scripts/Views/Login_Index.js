@@ -31,7 +31,8 @@ $(document).ready(function () {
 // Al mostrar el modal de registro, ocultar contraseñas y cargar empresas
 $('#modalRegistroUsuario').on('show.bs.modal', function () {
     $('#grupoPassword').hide();
-    cargarEmpresas(); // datos dummy
+    cargarEmpresas();
+    cargarRoles();// datos dummy
 
     if ($('#Empresa').length && $('#Rol').length) {
         $('#Empresa').val('');
@@ -59,5 +60,33 @@ function cargarEmpresas() {
 
     empresas.forEach(e => {
         select.append(`<option value="${e.id}">${e.nombre}</option>`);
+    });
+}
+
+function cargarRoles() {
+    const Roles = [
+        { id: '1', nombre: 'Representante legal en el Ecuador' },
+        { id: '2', nombre: 'Director de Operaciones del EAE' },
+        { id: '3', nombre: 'Director AACE' },
+        { id: '4', nombre: 'POI AACE' },
+        { id: 'otro', nombre: 'Otro' }
+    ];
+
+    const select = $('#Rol');
+    select.empty();
+    select.append('<option value="">-- Seleccione un Rol --</option>');
+
+    Roles.forEach(e => {
+        select.append(`<option value="${e.id}">${e.nombre}</option>`);
+    });
+
+    // Mostrar u ocultar el campo personalizado al seleccionar "Otro"
+    select.off('change').on('change', function () {
+        if ($(this).val() === 'otro') {
+            $('#otroRolContainer').slideDown(); // muestra con animación
+        } else {
+            $('#otroRolContainer').slideUp();   // oculta con animación
+            $('#OtroRol').val('');
+        }
     });
 }

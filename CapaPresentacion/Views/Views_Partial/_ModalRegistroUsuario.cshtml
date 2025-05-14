@@ -68,9 +68,18 @@
                         <div class="form-group row">
                             <label for="Rol" class="col-sm-4 col-form-label">Rol en la empresa:<span class="text-danger">*</span></label>
                             <div class="col-sm-8">
-                                <input class="form-control form-control-sm" type="text" id="Rol" name="Rol" placeholder="Ej: Piloto, Técnico" />
+                                <select class="form-control form-control-sm" id="Rol" name="Rol">
+                                    <option value="">-- Seleccione un Rol --</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="form-group row" id="otroRolContainer" style="display: none;">
+                            <label for="OtroRol" class="col-sm-4 col-form-label">Especifique el rol:<span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="OtroRol" name="OtroRol" placeholder="Ingrese el rol personalizado">
+                            </div>
+                        </div>
+
                     }
                     <div class="form-group row">
                         <samp>Campos con "</samp><span class="text-danger">*</span><samp>" son obligatorios</samp>

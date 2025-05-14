@@ -104,11 +104,18 @@
                             <i class="fas fa-file-upload"></i> Cargar desde Archivo
                         </button>
 
-                        <a href="@Url.Content("~/Content/documents/FormatoAeronaves.xlsx")" download class="btn btn-outline-info mb-2">
+                        <a href="@Url.Content("~/Content/documents/Formato_Aeronaves.xlsx")" download class="btn btn-outline-info mb-2">
                             <i class="fas fa-download"></i> Descargar Formato Para Subir Aeronaves
                         </a>
+                        <button class="btn btn-warning mr-2 mb-2" onclick="window.open('@Url.Content("~/Content/documents/Formato_Aeronaves.xlsx")', '_blank')">
+                            <i class="fas fa-info-circle"></i> Pasos para subir CSV
+                        </button>
+                        <input type="file" id="inputArchivo" accept=".csv" style="display: none;">
+                        <small class="text-muted mt-2 ml-1 d-block">
+                            <i class="fas fa-exclamation-circle text-warning"></i>
+                            Solo se permite subir archivos en formato <strong>.csv</strong> separados por punto y coma (<code>;</code>).
+                        </small>
 
-                        <input type="file" id="inputArchivo" accept=".csv, .xlsx" style="display: none;">
                     </div>
 
                     <!-- Tabla de aeronaves -->
@@ -450,8 +457,6 @@
     </div>
 </div>
 
-<!-- Librería para leer Excel -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -546,47 +551,58 @@
 
         // Cuando el usuario seleccione un archivo
         $('#inputArchivo').change(function (e) {
-            var archivo = e.target.files[0];
+            const archivo = e.target.files[0];
             if (!archivo) return;
 
-            var lector = new FileReader();
+            if (!archivo.name.endsWith('.csv')) {
+                alert('Por favor seleccione un archivo .csv válido.');
+                return;
+            }
+
+            const lector = new FileReader();
 
             lector.onload = function (e) {
-                var data = new Uint8Array(e.target.result);
-                var workbook = XLSX.read(data, { type: 'array' });
-                var nombrePrimeraHoja = workbook.SheetNames[0];
-                var hoja = workbook.Sheets[nombrePrimeraHoja];
-                var filas = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+                const contenido = e.target.result;
+                const lineas = contenido.trim().split('\n');
+
+                if (lineas.length < 2) {
+                    alert('El archivo CSV no contiene datos.');
+                    return;
+                }
 
                 // Limpiar tabla antes de cargar nuevas filas
                 $('#tablaAeronaves tbody').empty();
 
-                for (var i = 1; i < filas.length; i++) {
-                    var fila = filas[i];
-                    if (fila.length === 0) continue;
+                for (let i = 1; i < lineas.length; i++) {
+                    const fila = lineas[i].split(';');
 
-                    var nuevaFila = `
-                        <tr>
-                            <td>${fila[0] || ''}</td>
-                            <td>${fila[1] || ''}</td>
-                            <td>${fila[2] || ''}</td>
-                            <td>${fila[3] || ''}</td>
-                            <td>${fila[4] || ''}</td>
-                            <td>${fila[5] || ''}</td>
-                            <td>${fila[6] || ''}</td>
-                            <td>${fila[7] || ''}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-danger btn-sm btnEliminarAeronave">Eliminar</button>
-                            </td>
-                        </tr>
-                    `;
+                    if (fila.length !== 8) {
+                        alert(`Error en la fila ${i + 1}: Se esperaban 8 columnas pero se encontraron ${fila.length}.`);
+                        return; // Detiene la carga si hay un error
+                    }
+
+                    const nuevaFila = `
+                <tr>
+                    <td>${fila[0].trim()}</td>
+                    <td>${fila[1].trim()}</td>
+                    <td>${fila[2].trim()}</td>
+                    <td>${fila[3].trim()}</td>
+                    <td>${fila[4].trim()}</td>
+                    <td>${fila[5].trim()}</td>
+                    <td>${fila[6].trim()}</td>
+                    <td>${fila[7].trim()}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btnEliminarAeronave">Eliminar</button>
+                    </td>
+                </tr>
+            `;
                     $('#tablaAeronaves tbody').append(nuevaFila);
                 }
 
                 actualizarContador();
             };
 
-            lector.readAsArrayBuffer(archivo);
+            lector.readAsText(archivo, 'UTF-8');
         });
 
         // Función genérica para guardar formularios (demo)

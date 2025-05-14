@@ -2312,8 +2312,8 @@
     <Content Include="Content\plugins\summernote\summernote.js.map" />
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
-    <Content Include="Content\documents\FormatoAeronaves.xlsx" />
     <Content Include="Content\documents\prueba.pdf" />
+    <Content Include="Content\documents\Formato_Aeronaves.xlsx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

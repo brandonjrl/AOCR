@@ -25,7 +25,6 @@
                                             </a>
                                         </div>
 
-                                        <!-- Mostrar mensaje de error si existe -->
                                         @if (ViewBag.Error != null)
                                         {
                                             <div class="alert alert-danger text-center">
@@ -33,38 +32,44 @@
                                             </div>
                                         }
 
-                                            <form action="@Url.Action("Index", "Login")" method="post" class="p-2">
-                                                <div class="form-group">
-                                                    <label for="Codigo" class="col-form-label text-primary">Usuario</label>
-                                                    <input class="form-control" type="text" name="Codigo" required autocomplete="off" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="clave" class="col-form-label text-primary">Contraseña</label>
-                                                    <div class="input-group">
-                                                        <input id="clave" class="form-control" type="password" name="clave" required autocomplete="off" />
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()" tabindex="-1">
-                                                                <i class="fa fa-eye" id="toggleIcon"></i>
-                                                            </button>
-                                                        </div>
+                                        <form action="@Url.Action("Index", "Login")" method="post" class="p-2">
+                                            <div class="form-group">
+                                                <label for="Codigo" class="col-form-label text-primary">Usuario</label>
+                                                <input class="form-control" type="text" name="Codigo" required autocomplete="off" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="clave" class="col-form-label text-primary">Contraseña</label>
+                                                <div class="input-group">
+                                                    <input id="clave" class="form-control" type="password" name="clave" required autocomplete="off" />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()" tabindex="-1">
+                                                            <i class="fa fa-eye" id="toggleIcon"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="mb-3 text-center">
-                                                    <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+                                            <div class="form-group text-left d-flex align-items-center justify-content-between">
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" id="termsCheck">
+                                                    <label class="form-check-label mb-0" for="termsCheck">
+                                                        <a href="#" data-toggle="modal" data-target="#termsModal">Acepto los términos</a>
+                                                    </label>
                                                 </div>
-                                                <div class="text-center mt-2">
-                                                    <a href="#" class="text-primary" data-toggle="modal" data-target="#modalRegistroUsuario">
-                                                        <!-- Llamada al modal-->
-                                                        ¿Eres nuevo? Regístrate aquí
-                                                    </a>
-                                                </div>
+                                                <button class="btn btn-primary" type="submit" id="loginBtn" disabled>Ingresar</button>
+                                            </div>
 
-                                                <div class="text-center">
-                                                    <a href="#" class="text-muted" data-toggle="modal" data-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
-                                                </div>
 
-                                            </form>
+                                            <div class="text-center mt-2">
+                                                <a href="#" class="text-primary" data-toggle="modal" data-target="#modalRegistroUsuario">
+                                                    ¿Eres nuevo? Regístrate aquí
+                                                </a>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <a href="#" class="text-muted" data-toggle="modal" data-target="#forgotPasswordModal">¿Olvidaste tu contraseña?</a>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -78,7 +83,6 @@
                                         </p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -255,6 +259,33 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal de Términos -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 shadow-sm">
+                <div class="modal-header bg-light border-bottom">
+                    <h5 class="modal-title font-weight-bold text-dark" id="termsModalLabel">
+                        Términos y Condiciones de Protección de Datos
+                    </h5>
+                </div>
+                <div class="modal-body text-justify" style="font-size: 14px; color: #333;">
+                    En cumplimiento de la <strong>Ley Orgánica de Protección de Datos Personales del Ecuador</strong>, informamos que los datos personales que usted proporcione a través de esta plataforma serán tratados de manera confidencial y segura. <br><br>
+
+                    Su información será utilizada exclusivamente para la gestión de su cuenta, el cumplimiento de obligaciones legales, y la mejora de los servicios prestados por la Dirección General de Aviación Civil. <br><br>
+
+                    Usted tiene derecho a solicitar en cualquier momento el acceso, rectificación, eliminación, oportuna oposición o portabilidad de sus datos, conforme a la normativa vigente. <br><br>
+
+                    Al aceptar estos términos, usted consiente expresamente el tratamiento de sus datos bajo los principios de legalidad, finalidad, proporcionalidad, seguridad y confidencialidad.
+                </div>
+                <div class="modal-footer bg-light text-right">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

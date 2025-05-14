@@ -13,9 +13,19 @@
     }
 }
 
-// Mostrar automáticamente el modal de bancos
+// Mostrar automáticamente el modal de bancos (si existe)
 $(document).ready(function () {
     $('#modalCuentasBancos').modal('show');
+
+    // Activar o desactivar botón de login según checkbox
+    const termsCheck = document.getElementById("termsCheck");
+    const loginBtn = document.getElementById("loginBtn");
+
+    if (termsCheck && loginBtn) {
+        termsCheck.addEventListener("change", function () {
+            loginBtn.disabled = !this.checked;
+        });
+    }
 });
 
 // Al mostrar el modal de registro, ocultar contraseñas y cargar empresas
@@ -29,12 +39,10 @@ $('#modalRegistroUsuario').on('show.bs.modal', function () {
     }
 });
 
-// Función para mostrar los campos de contraseña
 function mostrarCamposContrasena() {
     $('#grupoPassword').show();
 }
 
-// Cargar empresas dummy al <select>
 function cargarEmpresas() {
     const empresas = [
         { id: '1', nombre: 'DGAC' },
@@ -46,7 +54,7 @@ function cargarEmpresas() {
     ];
 
     const select = $('#Empresa');
-    select.empty(); // limpia las opciones anteriores
+    select.empty();
     select.append('<option value="">-- Seleccione una empresa --</option>');
 
     empresas.forEach(e => {

@@ -17,7 +17,7 @@
 $(document).ready(function () {
     $('#modalCuentasBancos').modal('show');
 
-    // Activar o desactivar botón de login según checkbox
+    // Activar o desactivar botón de login según checkbox 
     const termsCheck = document.getElementById("termsCheck");
     const loginBtn = document.getElementById("loginBtn");
 

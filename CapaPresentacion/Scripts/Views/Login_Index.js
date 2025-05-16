@@ -32,11 +32,10 @@ $(document).ready(function () {
 $('#modalRegistroUsuario').on('show.bs.modal', function () {
     $('#grupoPassword').hide();
     cargarEmpresas();
-    cargarRoles();// datos dummy
+    cargarRoles();
 
     if ($('#Empresa').length && $('#Rol').length) {
         $('#Empresa').val('');
-        $('#Rol').val('');
     }
 });
 
